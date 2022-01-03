@@ -27,27 +27,42 @@ def main():
 
     DVMN_TOKEN = os.getenv("DVMN_TOKEN")
     TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
+    CHAT_ID = os.getenv("CHAT_ID")
     dvmn_reviews_url = "https://dvmn.org/api/long_polling/"
     timestamp = None
-    chat_id = 221413677
 
     bot = telegram.Bot(token=TELEGRAM_TOKEN)
-    bot.send_message(text="Hello, Виталий", chat_id=chat_id)
 
-    # updates = bot.get_updates()
-    # print(updates[0])
+    while True:
+        try:
+            dvmn_api_response = get_dvmn_api_responce(
+                dvmn_reviews_url, DVMN_TOKEN, timestamp
+            )
 
-    # while True:
-    #     try:
-    #         dvmn_api_response = get_dvmn_api_responce(
-    #             dvmn_reviews_url, DVMN_TOKEN, timestamp
-    #         )
-    #         if dvmn_api_response["status"] == "timeout":
-    #             timestamp = str(dvmn_api_response["timestamp_to_request"])
-    #     except requests.exceptions.ReadTimeout:
-    #         pass
-    #     except requests.exceptions.ConnectionError:
-    #         pass
+            if dvmn_api_response["status"] == "timeout":
+                timestamp = str(dvmn_api_response["timestamp_to_request"])
+
+            if dvmn_api_response["status"] == "found":
+                lesson_check_properties = dvmn_api_response["new_attempts"][0]
+                lesson_title = lesson_check_properties["lesson_title"]
+                lesson_result = (
+                    "К сожалению, в работе нашлись ошибки."
+                    if lesson_check_properties["is_negative"]
+                    else "Преподаватель принял Вашу работу!"
+                )
+                lesson_url = lesson_check_properties["lesson_url"]
+
+                message_text = (
+                    f'У Вас проверили работу "{lesson_title}".\n'
+                    + f"{lesson_result}\nСсылка на урок: {lesson_url}"
+                )
+
+                bot.send_message(text=message_text, chat_id=CHAT_ID)
+
+        except requests.exceptions.ReadTimeout:
+            pass
+        except requests.exceptions.ConnectionError:
+            pass
 
 
 if __name__ == "__main__":
