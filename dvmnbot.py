@@ -43,7 +43,7 @@ def main():
             )
 
             if dvmn_api_response["status"] == "timeout":
-                timestamp = str(dvmn_api_response["timestamp_to_request"])
+                timestamp = dvmn_api_response["timestamp_to_request"]
 
             if dvmn_api_response["status"] == "found":
                 lesson_check_properties = dvmn_api_response["new_attempts"][0]
@@ -61,7 +61,6 @@ def main():
                 )
 
                 bot.send_message(text=message_text, chat_id=chat_id)
-            print(timestamp)
 
         except requests.exceptions.ReadTimeout:
             pass
