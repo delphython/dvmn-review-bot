@@ -6,7 +6,7 @@ import telegram
 from dotenv import load_dotenv
 
 
-def get_dvmn_api_responce(url, token, timestamp):
+def get_dvmn_api_response(url, token, timestamp):
     headers = {
         "Authorization": f"Token {token}",
         "timestamp": timestamp,
@@ -35,7 +35,7 @@ def main():
 
     while True:
         try:
-            dvmn_api_response = get_dvmn_api_responce(
+            dvmn_api_response = get_dvmn_api_response(
                 dvmn_reviews_url, DVMN_TOKEN, timestamp
             )
 
