@@ -9,12 +9,15 @@ from dotenv import load_dotenv
 def get_dvmn_api_response(url, token, timestamp):
     headers = {
         "Authorization": f"Token {token}",
+    }
+    params = {
         "timestamp": timestamp,
     }
 
     response = requests.get(
         url,
         headers=headers,
+        params=params,
     )
 
     response.raise_for_status()
@@ -58,6 +61,7 @@ def main():
                 )
 
                 bot.send_message(text=message_text, chat_id=chat_id)
+            print(timestamp)
 
         except requests.exceptions.ReadTimeout:
             pass
