@@ -2,6 +2,7 @@ import os
 
 import requests
 import telegram
+import textwrap
 
 from dotenv import load_dotenv
 
@@ -55,9 +56,12 @@ def main():
                 )
                 lesson_url = lesson_check_properties["lesson_url"]
 
-                message_text = (
-                    f'У Вас проверили работу "{lesson_title}".\n'
-                    + f"{lesson_result}\nСсылка на урок: {lesson_url}"
+                message_text = textwrap.dedent(
+                    f"""\
+                    У Вас проверили работу "{lesson_title}".
+                    {lesson_result}
+                    Ссылка на урок: {lesson_url}
+                    """
                 )
 
                 bot.send_message(text=message_text, chat_id=chat_id)
