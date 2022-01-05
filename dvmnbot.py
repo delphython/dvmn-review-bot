@@ -25,18 +25,18 @@ def get_dvmn_api_response(url, token, timestamp):
 def main():
     load_dotenv()
 
-    DVMN_TOKEN = os.getenv("DVMN_TOKEN")
-    TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
-    CHAT_ID = os.getenv("CHAT_ID")
+    dvmn_token = os.getenv("DVMN_TOKEN")
+    telegram_token = os.getenv("TELEGRAM_TOKEN")
+    chat_id = os.getenv("CHAT_ID")
     dvmn_reviews_url = "https://dvmn.org/api/long_polling/"
     timestamp = None
 
-    bot = telegram.Bot(token=TELEGRAM_TOKEN)
+    bot = telegram.Bot(token=telegram_token)
 
     while True:
         try:
             dvmn_api_response = get_dvmn_api_response(
-                dvmn_reviews_url, DVMN_TOKEN, timestamp
+                dvmn_reviews_url, dvmn_token, timestamp
             )
 
             if dvmn_api_response["status"] == "timeout":
@@ -57,7 +57,7 @@ def main():
                     + f"{lesson_result}\nСсылка на урок: {lesson_url}"
                 )
 
-                bot.send_message(text=message_text, chat_id=CHAT_ID)
+                bot.send_message(text=message_text, chat_id=chat_id)
 
         except requests.exceptions.ReadTimeout:
             pass
