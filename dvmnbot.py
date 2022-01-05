@@ -1,5 +1,7 @@
 import os
 
+from time import sleep
+
 import requests
 import telegram
 import textwrap
@@ -34,6 +36,9 @@ def main():
     chat_id = os.getenv("CHAT_ID")
     dvmn_reviews_url = "https://dvmn.org/api/long_polling/"
     timestamp = None
+    suspension_time = 60
+    failed_connection_attempts = 0
+    max_failed_connection_attempts = 5
 
     bot = telegram.Bot(token=telegram_token)
 
@@ -69,7 +74,10 @@ def main():
         except requests.exceptions.ReadTimeout:
             pass
         except requests.exceptions.ConnectionError:
-            pass
+            failed_connection_attempts += 1
+            if failed_connection_attempts == max_failed_connection_attempts:
+                sleep(suspension_time)
+                failed_connection_attempts = 0
 
 
 if __name__ == "__main__":
