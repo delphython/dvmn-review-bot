@@ -87,6 +87,7 @@ def main():
                     Ссылка на урок: {lesson_url}
                     """
                 )
+                0 / 0
 
                 bot.send_message(text=message_text, chat_id=chat_id)
 
@@ -100,9 +101,9 @@ def main():
                 )
                 sleep(suspension_time)
                 failed_connection_attempts = 0
-        except Exception as e:
-            logger.error(f"Бот упал с ошибкой: {e}")
-            raise e
+        except Exception as err:
+            logger.error(f"Бот упал с ошибкой: {err}", exc_info=True)
+            raise err
 
 
 if __name__ == "__main__":
