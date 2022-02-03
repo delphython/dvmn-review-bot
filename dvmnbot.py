@@ -1,3 +1,4 @@
+import logging
 import os
 
 from time import sleep
@@ -39,8 +40,11 @@ def main():
     suspension_time = 60
     failed_connection_attempts = 0
     max_failed_connection_attempts = 5
+    logging.basicConfig(level=logging.DEBUG)
 
     bot = telegram.Bot(token=telegram_token)
+
+    logging.warning("Бот запущен!")
 
     while True:
         try:
