@@ -63,6 +63,7 @@ def main():
 
     while True:
         try:
+            0 / 0
             dvmn_api_response = get_dvmn_api_response(
                 dvmn_reviews_url, dvmn_token, timestamp
             )
@@ -87,7 +88,6 @@ def main():
                     Ссылка на урок: {lesson_url}
                     """
                 )
-                0 / 0
 
                 bot.send_message(text=message_text, chat_id=chat_id)
 
