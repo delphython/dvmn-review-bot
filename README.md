@@ -34,6 +34,18 @@ python dvmnbot.py
 ```
 Use Ctrl+C to interrupt the script.
 
+## Deploy
+For deploying on [Heroku](https://www.heroku.com) you should:
+1. Login or register there.
+2. Create a new app.
+3. Connect GitHub repository.:
+4. Create `Procfile` in the project root directory and add the text:
+```
+bot: python3 dvmnbot.py
+```
+5. Add DVMN_TOKEN, TELEGRAM_TOKEN and CHAT_ID environment variables in the Settings tab of the Heroku site. You should fill `Config Vars`.
+6. Don't forget to renew the project repository on Heroku.
+
 ## Meta
 
 Vitaly Klyukin — [@delphython](https://t.me/delphython) — [delphython@gmail.com](mailto:delphython@gmail.com)
