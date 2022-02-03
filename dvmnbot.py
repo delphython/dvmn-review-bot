@@ -102,7 +102,6 @@ def main():
                 failed_connection_attempts = 0
         except Exception as err:
             logger.error(f"Бот упал с ошибкой: {err}", exc_info=True)
-            raise err
 
 
 if __name__ == "__main__":
