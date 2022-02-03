@@ -10,6 +10,17 @@ import textwrap
 from dotenv import load_dotenv
 
 
+class TelegramLogsHandler(logging.Handler):
+    def __init__(self, tg_bot, chat_id):
+        super().__init__()
+        self.chat_id = chat_id
+        self.tg_bot = tg_bot
+
+    def emit(self, record):
+        log_entry = self.format(record)
+        self.tg_bot.send_message(chat_id=self.chat_id, text=log_entry)
+
+
 def get_dvmn_api_response(url, token, timestamp):
     headers = {
         "Authorization": f"Token {token}",
@@ -40,11 +51,15 @@ def main():
     suspension_time = 60
     failed_connection_attempts = 0
     max_failed_connection_attempts = 5
-    logging.basicConfig(level=logging.DEBUG)
 
     bot = telegram.Bot(token=telegram_token)
 
-    logging.warning("Бот запущен!")
+    logging.basicConfig(format="%(levelname)s %(message)s")
+    logger = logging.getLogger("Бот логгер")
+    logger.setLevel(logging.DEBUG)
+    logger.addHandler(TelegramLogsHandler(bot, chat_id))
+
+    logger.debug("Бот запущен!")
 
     while True:
         try:
