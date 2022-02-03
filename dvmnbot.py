@@ -59,7 +59,7 @@ def main():
     logger.setLevel(logging.DEBUG)
     logger.addHandler(TelegramLogsHandler(bot, chat_id))
 
-    logger.debug("Бот запущен!")
+    logger.info("Бот запущен!")
 
     while True:
         try:
@@ -95,8 +95,14 @@ def main():
         except requests.exceptions.ConnectionError:
             failed_connection_attempts += 1
             if failed_connection_attempts == max_failed_connection_attempts:
+                logger.warning(
+                    "Exceeded the number of maximum connection attempts"
+                )
                 sleep(suspension_time)
                 failed_connection_attempts = 0
+        except Exception as e:
+            logger.error(f"Бот упал с ошибкой: {e}")
+            raise e
 
 
 if __name__ == "__main__":
