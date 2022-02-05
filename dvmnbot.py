@@ -64,7 +64,6 @@ def main():
 
     while True:
         try:
-            0 / 0
             dvmn_api_response = get_dvmn_api_response(
                 dvmn_reviews_url, dvmn_token, timestamp
             )
