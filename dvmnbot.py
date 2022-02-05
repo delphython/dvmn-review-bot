@@ -10,6 +10,9 @@ import textwrap
 from dotenv import load_dotenv
 
 
+logger = logging.getLogger("Бот логгер")
+
+
 class TelegramLogsHandler(logging.Handler):
     def __init__(self, tg_bot, chat_id):
         super().__init__()
@@ -55,14 +58,13 @@ def main():
     bot = telegram.Bot(token=telegram_token)
 
     logging.basicConfig(format="%(levelname)s %(message)s")
-    logger = logging.getLogger("Бот логгер")
     logger.setLevel(logging.DEBUG)
     logger.addHandler(TelegramLogsHandler(bot, chat_id))
-
     logger.info("Бот запущен!")
 
     while True:
         try:
+            0 / 0
             dvmn_api_response = get_dvmn_api_response(
                 dvmn_reviews_url, dvmn_token, timestamp
             )
@@ -101,7 +103,7 @@ def main():
                 sleep(suspension_time)
                 failed_connection_attempts = 0
         except Exception as err:
-            logger.error(f"Бот упал с ошибкой: {err}", exc_info=True)
+            logger.exception(f"Бот упал с ошибкой: {err}")
 
 
 if __name__ == "__main__":
