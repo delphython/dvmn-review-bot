@@ -1,0 +1,7 @@
+version: '3.8'
+
+services:
+  tg:
+    restart: always
+    build: ./
+    env_file: ./.env
