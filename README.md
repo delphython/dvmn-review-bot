@@ -44,23 +44,55 @@ CHAT_ID="123456789"
 
 ## Usage
 
-Run python script:
+Build the docker image:
 ```sh
-python dvmnbot.py
+docker build --tag dvmn-review-bot .
 ```
-Use Ctrl+C to interrupt the script.
+
+Run your container in detached mode or in the background:
+```sh
+docker run -d dvmn-review-bot
+```
+
+To restart your container:
+```sh
+docker restart dvmn-review-bot
+```
+
+To stop your container (stop the bot):
+```sh
+docker stop dvmn-review-bot
+```
 
 ## Deploy
 For deploying on [Heroku](https://www.heroku.com) you should:
 1. Login or register there.
-2. Create a new app.
-3. Connect GitHub repository.:
-4. Create `Procfile` in the project root directory and add the text:
+2. Open [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli).
+3. Login to Heroku:
+```sh
+heroku login
 ```
-bot: python3 dvmnbot.py
+4. Log in to Container Registry:
 ```
-5. Add DVMN_TOKEN, TELEGRAM_TOKEN and CHAT_ID environment variables in the Settings tab of the Heroku site. You should fill `Config Vars`.
-6. Don't forget to renew the project repository on Heroku.
+heroku container:login
+```
+5. Clone repository:
+```
+git clone https://github.com/yourgithublogin/yourrepo.git
+```
+6. Create a Heroku app:
+```
+heroku create
+```
+7. Build the image and push to Container Registry:
+```
+heroku container:push bot
+```
+8. Release the image to your app:
+```
+heroku container:release bot
+```
+
 
 ## Meta
 
