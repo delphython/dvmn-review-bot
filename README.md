@@ -9,6 +9,22 @@ Python3 should be already installed. Use `pip` to install dependencies:
 pip install -r requirements.txt
 ```
 
+Install docker based on your operating system.
+For ubuntu 18.04:
+```bash
+apt-get update
+apt-get install ca-certificates curl gnupg lsb-release
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+apt-get update
+apt-get install docker-ce docker-ce-cli containerd.io docker-compose
+```
+
 ## Installation
 You have to set DVMN_TOKEN, TELEGRAM_TOKEN and CHAT_ID environment variables before using the script.
 
