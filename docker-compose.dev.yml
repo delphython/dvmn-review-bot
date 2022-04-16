@@ -4,3 +4,5 @@ services:
   tg:
     restart: always
     build: ./
+    volumes:
+    - ./:/app
