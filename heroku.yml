@@ -1,5 +1,6 @@
 build:
   docker:
     bot: Dockerfile
+    worker: worker/Dockerfile
 run:
-  bot: python3 dvmnbot.py
+  bot: docker run bot
