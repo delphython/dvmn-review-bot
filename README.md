@@ -72,25 +72,17 @@ For deploying on [Heroku](https://www.heroku.com) you should:
 ```sh
 heroku login
 ```
-4. Log in to Container Registry:
+4. Create your app:
 ```
-heroku container:login
+heroku create my-app-name --manifest
 ```
 5. Clone repository:
 ```
 git clone https://github.com/yourgithublogin/yourrepo.git
 ```
-6. Create a Heroku app:
+6. Push your app to Heroku:
 ```
-heroku create
-```
-7. Build the image and push to Container Registry:
-```
-heroku container:push bot
-```
-8. Release the image to your app:
-```
-heroku container:release bot
+git push heroku main
 ```
 
 
