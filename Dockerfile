@@ -10,4 +10,4 @@ RUN pip3 install -r requirements.txt
 
 COPY . .
 
-CMD [ "docker", "run", "bot"]
+CMD [ "python3", "dvmnbot.py"]
