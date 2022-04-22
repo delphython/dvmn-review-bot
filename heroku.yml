@@ -3,4 +3,4 @@ build:
     bot: Dockerfile
     worker: worker/Dockerfile
 run:
-  bot: docker run bot
+  bot: docker run worker
