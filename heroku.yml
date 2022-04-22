@@ -1,6 +1,3 @@
 build:
   docker:
     bot: Dockerfile
-    worker: worker/Dockerfile
-run:
-  bot: docker run worker
