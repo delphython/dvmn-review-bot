@@ -1,3 +1,5 @@
 build:
   docker:
     bot: Dockerfile
+run:
+  bot: python3 dvmnbot.py
