@@ -76,11 +76,15 @@ heroku login
 ```
 heroku create my-app-name --manifest
 ```
-5. Clone repository:
+4. Create your app:
+```
+heroku config:set DVMN_TOKEN=b12c2c0b00f946abba12345c781de3ff12345678 TELEGRAM_TOKEN=1234567890:AAHOoGbQZQripXSKTn1ZRmKf6g3-wwwwwww CHAT_ID=123456789
+```
+6. Clone repository:
 ```
 git clone https://github.com/yourgithublogin/yourrepo.git
 ```
-6. Push your app to Heroku:
+7. Push your app to Heroku:
 ```
 git push heroku main
 ```
