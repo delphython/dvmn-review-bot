@@ -51,7 +51,7 @@ docker build --tag dvmn-review-bot .
 
 Run your container in detached mode or in the background:
 ```sh
-docker run -d dvmn-review-bot
+docker run -d dvmn-review-bot --env-file .env
 ```
 
 To restart your container:
