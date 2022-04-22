@@ -1,1 +1,1 @@
-bot: python3 dvmnbot.py
+bot: docker run bot
